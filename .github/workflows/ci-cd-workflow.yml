@@ -89,26 +89,27 @@ jobs:
           name: Test
           path: ./dist/
 
-  # deploy-test:
-  #   name: "[Test] Deploy"
-  #   needs: build-test
-  #   runs-on: ubuntu-latest
-  #   environment: Test
-  #   steps:
-  #     - name: Download Artifact form Build
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: Test
-  #         path: ./dist/
+  deploy-test:
+    name: "[Test] Deploy"
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: Test
+    steps:
+      - name: Download Artifact form Build
+        uses: actions/download-artifact@v4
+        with:
+          name: Test
+          path: ./dist/
 
-  #     - name: Deploy with FTP
-  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-  #       with:
-  #         server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
-  #         username: ${{ secrets.FTP_DEPLOY_USERNAME }}
-  #         password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-  #         local-dir: ./dist/
-  #         dangerous-clean-slate: true
+      - name: Deploy with FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
+          username: ${{ secrets.FTP_DEPLOY_USERNAME }}
+          password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
+          server-dir: ./volksschule-neubau/
+          local-dir: ./dist/
+          dangerous-clean-slate: true
 
   # # Production Environment
 
