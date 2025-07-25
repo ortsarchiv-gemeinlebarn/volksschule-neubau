@@ -1,0 +1,26 @@
+{
+    "name": "@ortsarchiv-gemeinlebarn/volksschule-neubau",
+    "version": "6",
+    "description": "Web Project",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "parcel": "npx parcel",
+        "start": "parcel src/index.html --no-cache --open",
+        "start:landing": "parcel src/landing/index.html",
+        "ci:build": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist",
+        "ci:build:vorschau": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist/landing/vorschau --public-url ./",
+        "ci:build:landing": "parcel build src/landing/index.html --log-level error --no-cache --dist-dir ./dist/landing"
+    },
+    "author": "Jakob Vesely",
+    "license": "ISC",
+    "dependencies": {
+        "@ortsarchiv-gemeinlebarn/components": "^2.18.0"
+    },
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.15.4",
+        "buffer": "^6.0.3",
+        "parcel": "^2.15.4",
+        "svgo": "^4.0.0"
+    }
+}

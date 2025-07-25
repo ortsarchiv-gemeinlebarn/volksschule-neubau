@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- HEAD-PLACEHOLDER -->
+
+        <!-- <link rel="icon" type="image/svg+xml" href="../assets/favicons/favicon.svg" />
+        <link rel="shortcut icon" href="../assets/favicons/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png" /> -->
+
+        <meta property="og:title" content="Der Neubau der Volksschule in Gemeinlebarn">
+        <meta property="og:type" content="website" />
+        <meta property="og:image"
+            content="https://data.ortsarchiv-gemeinlebarn.org/volksschule-neubau/album/large/Foto_00001.jpg">
+        <meta property="og:url" content="https://volksschule.ortsarchiv-gemeinlebarn.org">
+        <meta property="og:description"
+            content="ultimediale Inhalte zum Neubau der Volksschule in Gemeinlebarn aus dem Ortsarchiv">
+        <meta property="og:site_name" content="Ortsarchiv Gemeinlebarn">
+
+        <meta name="twitter:card"
+            content="https://data.ortsarchiv-gemeinlebarn.org/volksschule-neubau/album/large/Foto_00001.jpg">
+        <meta name="twitter:image:alt"
+            content="Multimediale Inhalte zum Neubau der Volksschule in Gemeinlebarn aus dem Ortsarchiv">
+
+
+        <title>Der Neubau der Volksschule in Gemeinlebarn</title>
+
+        <link rel="stylesheet" href="./load.scss">
+        <link rel="stylesheet"
+            href="../node_modules/@ortsarchiv-gemeinlebarn/components/dist/oag-components/oag-components.css">
+        <link rel="stylesheet" href="./style.scss">
+        <script type="module" src="./app.js"></script>
+    </head>
+
+    <body>
+        <div id="preloading" class="oag-loading">
+            <div class="spinner"></div>
+            <h1>Der Neubau der Volksschule in Gemeinlebarn</h1>
+            <h3>Lade Projekt</h3>
+        </div>
+
+        <oag-application id="application" desktop-optimized="true">
+
+            <oag-hero id="hero" headline="Der Neubau der Volksschule in Gemeinlebarn"
+                caption="Eine großes gemeinsames Projekt"
+                background-image="https://data.ortsarchiv-gemeinlebarn.org/volksschule-neubau/album/large/Foto_00014.jpg"
+                background-overlay="rgba(0, 0, 0, 0.15)">
+            </oag-hero>
+
+            <oag-content>
+                <h3 id="context">Lorem Ipsum</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti non illum expedita saepe! Quaerat
+                    tenetur reiciendis aut excepturi dolore quibusdam cupiditate, rerum architecto libero neque
+                    perferendis tempore error quo nulla officiis veniam sequi asperiores dignissimos hic. Rerum, dolor.
+                    Maiores repellat culpa vitae accusantium, et maxime nulla repudiandae aut minus mollitia provident
+                    aperiam consectetur eos, nam voluptate voluptas veniam nisi, harum consequatur. Repudiandae,
+                    distinctio. Inventore blanditiis placeat rerum consequuntur veniam rem cupiditate, voluptate
+                    aspernatur, ullam soluta aperiam repellat possimus. Quia id ipsam, nemo iste officia nesciunt eius?
+                    Dolore eos voluptatibus, libero expedita saepe sapiente quo officia quia voluptates! Sint
+                    reprehenderit cum obcaecati minima officiis suscipit perferendis ratione voluptatem sed nihil quas
+                    quasi quam, quaerat illo quis nulla necessitatibus debitis rerum optio aperiam eum aliquid. Ut
+                    obcaecati doloremque cupiditate tempora qui esse voluptatibus tenetur id quasi soluta atque
+                    laudantium aspernatur magnam illum facilis, explicabo voluptatum velit cum adipisci porro, enim
+                    amet! Modi, minima! Modi tempora sed deleniti inventore repellendus cum veritatis beatae sapiente,
+                    exercitationem nam. Dignissimos, ad nam molestias molestiae quod beatae aliquam voluptas qui
+                    accusamus ipsa eligendi perferendis minima, rerum veritatis illo nostrum. Nihil non sapiente earum
+                    illum, fugiat eos quo voluptatem, quidem nostrum vel consectetur necessitatibus, laborum nulla.
+                    Dolor, minus.</p>
+
+            </oag-content>
+
+            <oag-information id="ortsarchv"></oag-information>
+
+            <oag-content>
+                <h2 id="changelog">Änderungsprotokoll</h2>
+                <p>Sie bekommen hier einen Überblick über alle Änderungen, die im Laufe der Zeit auf dieser Seite
+                    gemacht wurden. Der Quellcode dieses Projekts ist <a
+                        href="https://github.com/ortsarchiv-gemeinlebarn/volksschule-neubau" target="_blank"
+                        rel="noopener noreferrer">öffentlich auf der Plattform Github einsehbar</a>. Erweiterte
+                    (technische) Änderungen können so auch auf diese Weise nachvollzogen werden.</p>
+
+                <oag-changelog-version date="Sample Date" version="1">
+                    <oag-changelog-entry label="Sample Label" tags="Sample Tag">
+                        Sample Content
+                    </oag-changelog-entry>
+                </oag-changelog-version>
+            </oag-content>
+
+            <oag-imprint>
+                <h2 id="imprint">Impressum & Datenschutz</h2>
+                <p>Diese Veranstaltung und dazugehörige Online-Information sind ein Projekt des Ortsarchivs
+                    Gemeinlebarn.</p>
+                <p><strong>Datenschutz:</strong> Es werden keinerlei personenbezogene Daten erhoben!</p>
+                <p><strong>Medieninhaber:</strong> Jakob Vesely, Neubaugasse 17, 3133 Gemeinlebarn, <a
+                        href="mailto:contact@jakob.fyi">contact@jakob.fyi</a>, <a href="https://www.jakob.fyi"
+                        target="_blank" rel="noopener noreferrer">www.jakob.fyi</a></p>
+                <p><strong>Detailierte Versionsnummer:</strong> <!-- VERSION-PLACEHOLDER --></p>
+            </oag-imprint>
+
+            <oag-menu>
+                <oag-menu-item class="open-cockpit" onClick="openCockpit()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
+                </svg>
+                    <span>Menü</span>
+                </oag-menu-item>
+            </oag-menu>
+
+            <oag-cockpit type="side">
+                <h1 slot="head">Menü</h1>
+                <nav slot="navigation">
+                    <div class="navigation-column">
+                        <oag-cockpit-navigation-item class="level-1">
+                            Navigation Level 1
+                        </oag-cockpit-navigation-item>
+                        <oag-cockpit-navigation-item class="level-2" link="context">
+                            Navigation Level 2
+                        </oag-cockpit-navigation-item>
+                    </div>
+                </nav>
+            </oag-cockpit>
+
+        </oag-application>
+    </body>
+
+</html>
