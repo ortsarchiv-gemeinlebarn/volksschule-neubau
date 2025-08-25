@@ -37,5 +37,8 @@ defineCustomElements();
 
 window.openAudioGuide = () =>
     document
-        .getElementsByTagName("oag-cockpit")[0]
+        .getElementById("audio-guide-sheet")
         .setAttribute("visible", "true");
+
+window.closeAudioGuide = () =>
+    document.getElementById("audio-guide-sheet").close();

@@ -34,5 +34,45 @@ oag-menu:not(.scrolled) .open-cockpit {
 }
 
 // Audio Guide
-oag-cockpit {
+#audio-guide-sheet {
+    button {
+        justify-self: center;
+    }
+    .content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        height: 100%;
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+            position: relative;
+
+            .number {
+                background-color: var(--oag-colors-contrast);
+                color: var(--oag-colors-on-contrast);
+                font-size: 1.35rem;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: -20px;
+                top: -20px;
+                z-index: 1;
+                font-weight: bold;
+            }
+
+            oag-audio {
+                flex: 1;
+                --padding: 40px 40px 40px 60px;
+            }
+        }
+    }
 }

@@ -110,8 +110,61 @@
                 </oag-menu-item>
             </oag-menu>
 
-            <oag-cockpit type="side">
+            <oag-cockpit id="audio-guide-sheet" type="sheet" close-button="false">
                 <h1 slot="head">Audio Guide</h1>
+                <button slot="footer" onclick="closeAudioGuide()">
+                    Schließen
+                </button>
+                <div class="content">
+                    <div class="item">
+                        <div class="number">1</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                    <div class="item">
+                        <div class="number">2</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                    <div class="item">
+                        <div class="number">3</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                    <div class="item">
+                        <div class="number">4</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                    <div class="item">
+                        <div class="number">5</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                    <div class="item">
+                        <div class="number">6</div>
+                        <oag-audio
+                            headline="Titel"
+                            source="https://data.ortsarchiv-gemeinlebarn.org/samples/file_example_MP3_700KB.mp3">
+                            Subtitle
+                        </oag-audio>
+                    </div>
+                </div>
             </oag-cockpit>
 
         </oag-application>
