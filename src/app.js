@@ -35,11 +35,10 @@ heroPreload.addEventListener("load", () => {
 import { defineCustomElements } from "@ortsarchiv-gemeinlebarn/components/dist/components/index.js";
 defineCustomElements();
 
-window.openCockpit = () =>
+window.openAudioGuide = () =>
     document
-        .getElementsByTagName("oag-cockpit")[0]
+        .getElementById("audio-guide-sheet")
         .setAttribute("visible", "true");
-window.openScreenMap = () =>
-    document
-        .getElementsByTagName("oag-screen-map")[0]
-        .setAttribute("visible", "true");
+
+window.closeAudioGuide = () =>
+    document.getElementById("audio-guide-sheet").close();
