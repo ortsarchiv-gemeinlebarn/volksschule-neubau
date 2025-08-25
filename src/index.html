@@ -42,7 +42,7 @@
             <h3>Lade Projekt</h3>
         </div>
 
-        <oag-application id="application" desktop-optimized="true">
+        <oag-application id="application" desktop-optimized="false">
 
             <oag-hero id="hero" headline="Der Neubau der Volksschule in Gemeinlebarn"
                 caption="Eine großes gemeinsames Projekt"
@@ -101,26 +101,16 @@
             </oag-imprint>
 
             <oag-menu>
-                <oag-menu-item class="open-cockpit" onClick="openCockpit()">
+                <oag-menu-item class="open-cockpit" onClick="openAudioGuide()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
                 </svg>
-                    <span>Menü</span>
+                    <span>Audio Guide öffnen</span>
                 </oag-menu-item>
             </oag-menu>
 
-            <oag-cockpit type="side">
-                <h1 slot="head">Menü</h1>
-                <nav slot="navigation">
-                    <div class="navigation-column">
-                        <oag-cockpit-navigation-item class="level-1">
-                            Navigation Level 1
-                        </oag-cockpit-navigation-item>
-                        <oag-cockpit-navigation-item class="level-2" link="context">
-                            Navigation Level 2
-                        </oag-cockpit-navigation-item>
-                    </div>
-                </nav>
+            <oag-cockpit>
+                <h1 slot="head">Audio Guide</h1>
             </oag-cockpit>
 
         </oag-application>
