@@ -1,6 +1,6 @@
 {
     "name": "@ortsarchiv-gemeinlebarn/volksschule-neubau",
-    "version": "6",
+    "version": "1",
     "description": "Web Project",
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "scripts": {
