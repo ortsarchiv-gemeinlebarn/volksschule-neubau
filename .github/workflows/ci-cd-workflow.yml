@@ -107,62 +107,63 @@ jobs:
           server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
           username: ${{ secrets.FTP_DEPLOY_USERNAME }}
           password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-          server-dir: ./projects/volksschule-neubau/
+          server-dir: ./projects/test/
           local-dir: ./dist/
           dangerous-clean-slate: true
 
-  # # Production Environment
+  # Production Environment
 
-  # build-production:
-  #   name: "[Production] Build"
-  #   runs-on: macos-latest
-  #   needs: prepare
-  #   if: ${{ needs.prepare.outputs.deployProduction == 'true' }}
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v4
+  build-production:
+    name: "[Production] Build"
+    runs-on: macos-latest
+    needs: prepare
+    if: ${{ needs.prepare.outputs.deployProduction == 'true' }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 22.x
-  #         cache: "npm"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "npm"
 
-  #     - name: "[npm] Install Dependencies"
-  #       run: npm ci
+      - name: "[npm] Install Dependencies"
+        run: npm ci
 
-  #     - name: Replace Placeholders in HTML
-  #       shell: pwsh
-  #       run: |
-  #         (Get-Content ./src/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/index.html
-  #         (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '') | Set-Content ./src/index.html
+      - name: Replace Placeholders in HTML
+        shell: pwsh
+        run: |
+          (Get-Content ./src/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/index.html
+          (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '') | Set-Content ./src/index.html
 
-  #     - name: "[npm] Build"
-  #       run: npm run ci:build --if-present
+      - name: "[npm] Build"
+        run: npm run ci:build --if-present
 
-  #     - name: "[publish] Artifact for Test"
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: Production
-  #         path: ./dist/
+      - name: "[publish] Artifact for Test"
+        uses: actions/upload-artifact@v4
+        with:
+          name: Production
+          path: ./dist/
 
-  # deploy-production:
-  #   name: "[Production] Deploy"
-  #   needs: build-production
-  #   runs-on: ubuntu-latest
-  #   environment: Production
-  #   steps:
-  #     - name: Download Artifact form Build
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: Production
-  #         path: ./dist/
+  deploy-production:
+    name: "[Production] Deploy"
+    needs: build-production
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Download Artifact form Build
+        uses: actions/download-artifact@v4
+        with:
+          name: Production
+          path: ./dist/
 
-  #     - name: Deploy with FTP
-  #       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-  #       with:
-  #         server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
-  #         username: ${{ secrets.FTP_DEPLOY_USERNAME }}
-  #         password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-  #         local-dir: ./dist/
-  #         dangerous-clean-slate: true
+      - name: Deploy with FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
+          username: ${{ secrets.FTP_DEPLOY_USERNAME }}
+          password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
+          server-dir: ./projects/volksschule-neubau/
+          local-dir: ./dist/
+          dangerous-clean-slate: true
