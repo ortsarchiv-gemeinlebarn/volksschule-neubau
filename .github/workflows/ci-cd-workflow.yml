@@ -56,8 +56,8 @@ jobs:
 
   # Build
 
-  builds:
-    name: "Build Landing Page & Main Page"
+  build:
+    name: "Build"
     runs-on: ubuntu-latest
     needs: prepare
     steps:
@@ -73,29 +73,16 @@ jobs:
       - name: "[npm] Install Dependencies"
         run: npm ci
 
-      - name: Replace Placeholders in HTML (Landing)
-        shell: pwsh
-        run: |
-          (Get-Content ./src/landing/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/landing/index.html
-          (Get-Content ./src/landing/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '<meta name="robots" content="noindex,nofollow">') | Set-Content ./src/landing/index.html
-
       - name: Replace Placeholders in HTML
         shell: pwsh
         run: |
           (Get-Content ./src/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/index.html
           (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '<meta name="robots" content="noindex,nofollow">') | Set-Content ./src/index.html
-
-      - name: "[npm] Build"
-        run: npm run ci:build:landing --if-present
+        # Enable when Production should be indexed
+        # (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '') | Set-Content ./src/index.html
 
       - name: "[npm] Build"
         run: npm run ci:build --if-present
-
-      - name: "[publish] Landing Page"
-        uses: actions/upload-artifact@v4
-        with:
-          name: Landing
-          path: ./dist/landing/
 
       - name: "[publish] Main Page"
         uses: actions/upload-artifact@v4
@@ -104,30 +91,8 @@ jobs:
           path: ./dist/main/
 
   deploy-test:
-    name: "[Test] Deploy Landing Page"
-    needs: builds
-    runs-on: ubuntu-latest
-    environment: Test
-    steps:
-      - name: Download Artifact form Build
-        uses: actions/download-artifact@v4
-        with:
-          name: Main
-          path: ./dist/
-
-      - name: Deploy with FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
-          username: ${{ secrets.FTP_DEPLOY_USERNAME }}
-          password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-          server-dir: ./projects/test/
-          local-dir: ./dist/
-          dangerous-clean-slate: true
-
-  deploy-landing-test:
-    name: "[Test] Deploy Main Page"
-    needs: builds
+    name: "[Test] Deploy"
+    needs: build
     runs-on: ubuntu-latest
     environment: Landing Test
     steps:
@@ -158,11 +123,6 @@ jobs:
         with:
           name: Main
           path: ./dist/
-
-      - name: Replace Placeholders in HTML
-        shell: pwsh
-        run: |
-          (Get-Content ./dist/index.html).Replace('<meta name="robots" content="noindex,nofollow">', '') | Set-Content ./dist/index.html
 
       - name: Deploy with FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
