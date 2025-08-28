@@ -82,6 +82,9 @@ body {
             stroke-dasharray: 750;
             stroke-dashoffset: 750;
             animation: dash 2s linear forwards;
+            fill: none;
+            stroke: #000;
+            stroke-width: 4px;
         }
     }
 
@@ -107,27 +110,5 @@ body {
         font-size: 1em;
         letter-spacing: 1px;
         color: #777;
-    }
-
-    @keyframes animloader {
-        0% {
-            border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25)
-                rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.75);
-        }
-
-        33% {
-            border-color: rgba(0, 0, 0, 0.75) rgba(0, 0, 0, 0.15)
-                rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35);
-        }
-
-        66% {
-            border-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.75)
-                rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
-        }
-
-        100% {
-            border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35)
-                rgba(0, 0, 0, 0.75) rgba(0, 0, 0, 0.15);
-        }
     }
 }
