@@ -26,8 +26,8 @@ jobs:
       - name: Evaluate Deployment Strategy
         id: setup
         run: |
-          echo "DEPLOY_TEST=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/bugfix/') }}" >> "$GITHUB_OUTPUT"
-          echo "DEPLOY_PRODUCTION=${{ (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true) || github.ref == 'refs/heads/main' }}" >> "$GITHUB_OUTPUT"
+          echo "DEPLOY_TEST=${{ startsWith(github.ref, 'refs/heads/feature/') || startsWith(github.ref, 'refs/heads/bugfix/') }}" >> "$GITHUB_OUTPUT"
+          echo "DEPLOY_PRODUCTION=${{ github.ref == 'refs/heads/main' }}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -54,13 +54,12 @@ jobs:
 
           echo "FULL_BUILD_NUMBER=v${{ steps.package.outputs.VERSION }}-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
 
-  # Test Environment
+  # Build
 
-  build-test:
-    name: "[Test] Build"
-    runs-on: macos-latest
+  builds:
+    name: "Build Landing Page & Main Page"
+    runs-on: ubuntu-latest
     needs: prepare
-    if: ${{ needs.prepare.outputs.deployTest == 'true' }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -74,6 +73,12 @@ jobs:
       - name: "[npm] Install Dependencies"
         run: npm ci
 
+      - name: Replace Placeholders in HTML (Landing)
+        shell: pwsh
+        run: |
+          (Get-Content ./src/landing/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/landing/index.html
+          (Get-Content ./src/landing/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '<meta name="robots" content="noindex,nofollow">') | Set-Content ./src/landing/index.html
+
       - name: Replace Placeholders in HTML
         shell: pwsh
         run: |
@@ -81,24 +86,33 @@ jobs:
           (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '<meta name="robots" content="noindex,nofollow">') | Set-Content ./src/index.html
 
       - name: "[npm] Build"
+        run: npm run ci:build:landing --if-present
+
+      - name: "[npm] Build"
         run: npm run ci:build --if-present
 
-      - name: "[publish] Artifact for Test"
+      - name: "[publish] Landing Page"
         uses: actions/upload-artifact@v4
         with:
-          name: Test
-          path: ./dist/
+          name: Landing
+          path: ./dist/landing/
+
+      - name: "[publish] Main Page"
+        uses: actions/upload-artifact@v4
+        with:
+          name: Main
+          path: ./dist/main/
 
   deploy-test:
-    name: "[Test] Deploy"
-    needs: build-test
+    name: "[Test] Deploy Landing Page"
+    needs: builds
     runs-on: ubuntu-latest
     environment: Test
     steps:
       - name: Download Artifact form Build
         uses: actions/download-artifact@v4
         with:
-          name: Test
+          name: Main
           path: ./dist/
 
       - name: Deploy with FTP
@@ -111,52 +125,44 @@ jobs:
           local-dir: ./dist/
           dangerous-clean-slate: true
 
-  # Production Environment
-
-  build-production:
-    name: "[Production] Build"
-    runs-on: macos-latest
-    needs: prepare
-    if: ${{ needs.prepare.outputs.deployProduction == 'true' }}
+  deploy-landing-test:
+    name: "[Test] Deploy Main Page"
+    needs: builds
+    runs-on: ubuntu-latest
+    environment: Landing Test
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download Artifact form Build
+        uses: actions/download-artifact@v4
         with:
-          node-version: 22.x
-          cache: "npm"
-
-      - name: "[npm] Install Dependencies"
-        run: npm ci
-
-      - name: Replace Placeholders in HTML
-        shell: pwsh
-        run: |
-          (Get-Content ./src/index.html).Replace('<!-- VERSION-PLACEHOLDER -->', '${{ needs.prepare.outputs.fullBuildNumber }}') | Set-Content ./src/index.html
-          (Get-Content ./src/index.html).Replace('<!-- HEAD-PLACEHOLDER -->', '') | Set-Content ./src/index.html
-
-      - name: "[npm] Build"
-        run: npm run ci:build --if-present
-
-      - name: "[publish] Artifact for Test"
-        uses: actions/upload-artifact@v4
-        with:
-          name: Production
+          name: Landing
           path: ./dist/
+
+      - name: Deploy with FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_DEPLOY_HOSTNAME }}
+          username: ${{ secrets.FTP_DEPLOY_USERNAME }}
+          password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
+          server-dir: ./projects/test/
+          local-dir: ./dist/
+          dangerous-clean-slate: true
 
   deploy-production:
     name: "[Production] Deploy"
-    needs: build-production
+    needs: deploy-test
     runs-on: ubuntu-latest
     environment: Production
     steps:
       - name: Download Artifact form Build
         uses: actions/download-artifact@v4
         with:
-          name: Production
+          name: Main
           path: ./dist/
+
+      - name: Replace Placeholders in HTML
+        shell: pwsh
+        run: |
+          (Get-Content ./dist/index.html).Replace('<meta name="robots" content="noindex,nofollow">', '') | Set-Content ./dist/index.html
 
       - name: Deploy with FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
