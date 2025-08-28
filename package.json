@@ -8,8 +8,7 @@
         "parcel": "npx parcel",
         "start": "parcel src/index.html --no-cache --open",
         "start:landing": "parcel src/landing/index.html",
-        "ci:build": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist",
-        "ci:build:vorschau": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist/landing/vorschau --public-url ./",
+        "ci:build": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist/main",
         "ci:build:landing": "parcel build src/landing/index.html --log-level error --no-cache --dist-dir ./dist/landing"
     },
     "author": "Jakob Vesely",
@@ -20,7 +19,6 @@
     "devDependencies": {
         "@parcel/transformer-sass": "^2.15.4",
         "buffer": "^6.0.3",
-        "parcel": "^2.15.4",
-        "svgo": "^3.3.2"
+        "parcel": "^2.15.4"
     }
 }
