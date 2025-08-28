@@ -9,8 +9,8 @@ const preloadTracker = {
 };
 
 const preloadHandler = () => {
-    if (preloadTracker.application && preloadTracker.hero) return;
-    // document.body.classList.add("loaded");
+    if (preloadTracker.application && preloadTracker.hero)
+        document.body.classList.add("loaded");
 };
 
 application?.addEventListener("loaded", () => {
