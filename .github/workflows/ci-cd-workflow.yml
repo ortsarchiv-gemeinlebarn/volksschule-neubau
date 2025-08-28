@@ -94,12 +94,12 @@ jobs:
     name: "[Test] Deploy"
     needs: build
     runs-on: ubuntu-latest
-    environment: Landing Test
+    environment: Test
     steps:
       - name: Download Artifact form Build
         uses: actions/download-artifact@v4
         with:
-          name: Landing
+          name: Main
           path: ./dist/
 
       - name: Deploy with FTP
