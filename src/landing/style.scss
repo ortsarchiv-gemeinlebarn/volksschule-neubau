@@ -9,28 +9,89 @@ body {
     padding: 0;
 }
 
-.hero-content {
-    margin-top: 2em;
+.multimedia-info {
+    margin-top: -10rem;
 
-    .headline {
-        font-size: 2.75rem;
-        padding-top: 3em;
-        padding-bottom: 1.5em;
-    }
+    .content {
+        background-color: yellow;
+        color: #333;
+        border-radius: var(--default-radius);
+        padding: var(--default-layout-padding)
+            calc(1.35 * var(--default-layout-padding));
+        margin: 0 var(--default-layout-padding);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        z-index: 999;
 
-    .date {
-        font-size: 2rem;
-    }
+        .top {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
 
-    .caption {
-        font-weight: normal;
-        color: #ddd;
-        font-size: 1.35rem;
+            h4 {
+                text-transform: uppercase;
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+                line-height: 1.35;
+            }
+
+            .icons {
+                svg {
+                    height: 30px;
+                }
+            }
+        }
+
+        p {
+            line-height: 1.35;
+            font-size: 1.1em;
+            margin: 0;
+            padding: 0;
+        }
     }
 }
 
-p {
-    font-size: 1.1em;
+oag-hero {
+    min-height: 0;
+    // padding-top: 0;
+    // --content-safe-zone-bottom: 0;
+
+    .hero-content {
+        margin-top: 2em;
+        position: relative;
+
+        .headline {
+            font-size: 2.75rem;
+            padding-top: 3em;
+            padding-bottom: 1.5em;
+        }
+
+        .date {
+            font-size: 2.5rem;
+
+            .pre {
+                font-weight: normal;
+                font-size: 0.7em;
+            }
+        }
+    }
+}
+
+.caption {
+    font-weight: normal;
+    color: #999;
+    font-size: 1.35rem;
+    margin-bottom: 30px;
+}
+
+.columns {
+    display: flex;
+    flex-direction: row;
+    gap: var(--default-layout-padding);
 }
 
 .publish {
