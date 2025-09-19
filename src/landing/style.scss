@@ -89,9 +89,15 @@ oag-hero {
 }
 
 .columns {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: var(--default-layout-padding);
+}
+
+@media screen and (max-width: 800px) {
+    .columns {
+        grid-template-columns: 1fr;
+    }
 }
 
 .publish {
