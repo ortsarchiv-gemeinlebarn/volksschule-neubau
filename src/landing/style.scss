@@ -94,15 +94,23 @@ oag-hero {
     gap: var(--default-layout-padding);
 }
 
+.logos {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: calc(2 * var(--default-layout-padding));
+    margin-bottom: calc(2 * var(--default-layout-padding));
+
+    img {
+        width: 100%;
+        max-width: 600px;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .columns {
         grid-template-columns: 1fr;
     }
-}
-
-.publish {
-    margin-top: 2em;
-    font-style: italic;
 }
 
 oag-imprint {
