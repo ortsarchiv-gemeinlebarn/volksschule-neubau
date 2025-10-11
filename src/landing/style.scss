@@ -117,3 +117,10 @@ oag-imprint {
     border-top: 1px solid #f1f1f1;
     padding-top: var(--default-layout-padding);
 }
+
+@media screen and (max-width: 550px) {
+    oag-hero,
+    .multimedia-info {
+        zoom: 0.8;
+    }
+}
