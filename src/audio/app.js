@@ -34,8 +34,3 @@ heroPreload.addEventListener("load", () => {
 
 import { defineCustomElements } from "@ortsarchiv-gemeinlebarn/components/dist/components/index.js";
 defineCustomElements();
-
-window.openCockpit = () =>
-    document
-        .getElementsByTagName("oag-cockpit")[0]
-        .setAttribute("visible", "true");

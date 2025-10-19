@@ -12,6 +12,56 @@ body {
     }
 }
 
+.quote-full {
+    margin: 0;
+}
+
+.chronik-transkript {
+    --layout-padding: 0;
+
+    oag-figure {
+        --layout-padding: 0;
+    }
+}
+
+oag-tooltip p {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.no-vertical-padding {
+    --layout-padding: 0 var(--default-layout-padding);
+}
+
+oag-audio {
+    position: relative;
+    overflow: visible;
+    font-size: 1.15em;
+    font-weight: 500;
+    color: #000;
+
+    &:before {
+        content: url("https://data.ortsarchiv-gemeinlebarn.org/volksschule-neubau/icons/headphones.svg");
+        position: absolute;
+        left: -30px;
+        top: -30px;
+        padding: 18px;
+        width: 60px;
+        height: 60px;
+        box-sizing: border-box;
+        background-color: #ffcf24;
+        border-radius: 999em;
+    }
+}
+
+// cite {
+//     display: inline-block;
+//     padding-left: 20px;
+//     border-left: 4px #f4f4f4 solid;
+//     margin-left: 20px;
+// }
+
 ul {
     margin-block-start: 0.2em;
     margin-block-end: 2em;
