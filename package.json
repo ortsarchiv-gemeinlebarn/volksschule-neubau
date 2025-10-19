@@ -8,13 +8,15 @@
         "parcel": "npx parcel",
         "start": "parcel src/index.html --no-cache --open",
         "start:landing": "parcel src/landing/index.html",
+        "start:audio": "parcel src/audio/index.html",
         "ci:build": "parcel build src/index.html --log-level error --no-cache --dist-dir ./dist/main",
-        "ci:build:landing": "parcel build src/landing/index.html --log-level error --no-cache --dist-dir ./dist/landing"
+        "ci:build:landing": "parcel build src/landing/index.html --log-level error --no-cache --dist-dir ./dist/landing",
+        "ci:build:audio": "parcel build src/audio/index.html --log-level error --no-cache --dist-dir ./dist/audio --public-url /audio/"
     },
     "author": "Jakob Vesely",
     "license": "ISC",
     "dependencies": {
-        "@ortsarchiv-gemeinlebarn/components": "^2.19.1"
+        "@ortsarchiv-gemeinlebarn/components": "^2.21.0"
     },
     "devDependencies": {
         "@parcel/transformer-sass": "^2.15.4",
